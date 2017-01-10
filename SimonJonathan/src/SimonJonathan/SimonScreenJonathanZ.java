@@ -83,7 +83,7 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 			select = (int) (Math.random()*button.length);
 		}
 		lastSelectedButton = select;
-		return new MoveJonathanZ(button[select]);
+		return new Move(button[select]);
 	}
 
 	private MoveInterfaceJonathanZ getMove(ButtonInterfaceJonathanZ b) {

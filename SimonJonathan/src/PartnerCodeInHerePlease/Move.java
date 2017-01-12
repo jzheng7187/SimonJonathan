@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package PartnerCodeInHerePlease;
 
 import SimonJonathan.ButtonInterfaceJonathanZ;
@@ -16,3 +17,19 @@ public class Move implements MoveInterfaceJonathanZ {
 	}
 
 }
+=======
+package PartnerCodeInHerePlease;
+
+import SimonJonathan.ButtonInterfaceJonathanZ;
+import SimonJonathan.MoveInterfaceJonathanZ;
+
+public class Move implements MoveInterfaceJonathanZ {
+
+	@Override
+	public ButtonInterfaceJonathanZ getButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
+>>>>>>> branch 'master' of https://github.com/jzheng7187/SimonJonathan

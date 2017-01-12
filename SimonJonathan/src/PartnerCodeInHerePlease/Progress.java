@@ -1,133 +1,60 @@
-<<<<<<< HEAD
 package PartnerCodeInHerePlease;
 
-import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import SimonJonathan.ProgressInterfaceJonathanZ;
+import gui.components.Component;
 
-public class Progress implements ProgressInterfaceJonathanZ {
+public class Progress extends Component implements ProgressInterfaceJonathanZ {
+	
+	private static final int WIDTH = 120;
+	private static final int HEIGHT = 50;
+
+	private boolean gameOver;
+	private String round;
+	private String sequence;
+	
 
 	public Progress() {
-		
+		super(60, 60, WIDTH, HEIGHT);
 	}
 
-	@Override
-	public int getHeight() {
-		
-		return 0;
-	}
-
-	@Override
-	public BufferedImage getImage() {
-		
-		return null;
-	}
-
-	@Override
-	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isAnimated() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setRound(int b) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void setSequenceSize(int b) {
 		// TODO Auto-generated method stub
 
 	}
 
-}
-=======
-package PartnerCodeInHerePlease;
+	public void update(Graphics2D g) {
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		FontMetrics fm = g.getFontMetrics();
+		if(gameOver){
+			g.setColor(new Color(255,55,90));
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			g.setColor(Color.white);
+			String go = "GAME OVER!";
+			g.drawString(go, (WIDTH - fm.stringWidth(go))/2, 20);
+			g.drawString(sequence, (WIDTH - fm.stringWidth(sequence))/2, 40);
 
-import java.awt.image.BufferedImage;
+		}else{
+			g.setColor(new Color(220,255,230));
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			g.setColor(Color.black);
+			g.drawRect(0, 0, WIDTH-1, HEIGHT-1);
+			if(round !=null && sequence != null){
 
-import SimonJonathan.ProgressInterfaceJonathanZ;
-
-public class Progress implements ProgressInterfaceJonathanZ {
-
-	@Override
-	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BufferedImage getImage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isAnimated() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setRound(int b) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setSequenceSize(int b) {
-		// TODO Auto-generated method stub
+				g.drawString(round, (WIDTH - fm.stringWidth(round))/2, 20);
+				g.drawString(sequence, (WIDTH - fm.stringWidth(sequence))/2, 40);
+			}
+		}
 
 	}
 
 }
->>>>>>> branch 'master' of https://github.com/jzheng7187/SimonJonathan

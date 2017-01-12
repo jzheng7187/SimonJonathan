@@ -4,15 +4,15 @@ import SimonJonathan.ButtonInterfaceJonathanZ;
 import SimonJonathan.MoveInterfaceJonathanZ;
 
 public class Move implements MoveInterfaceJonathanZ {
+	
+	private ButtonInterfaceJonathanZ b;
 
-	public Move() {
-		// TODO Auto-generated constructor stub
+	public Move(ButtonInterfaceJonathanZ b) {
+		this.b = b;
 	}
 
-	@Override
 	public ButtonInterfaceJonathanZ getButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return b;
 	}
 
 }

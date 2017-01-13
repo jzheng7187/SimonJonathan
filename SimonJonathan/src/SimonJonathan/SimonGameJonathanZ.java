@@ -16,7 +16,7 @@ public class SimonGameJonathanZ extends GUIApplication {
 	}
 
 	public static void main(String[] args) {
-		SimonGameJonathanZ sg = new SimonGameJonathanZ(500,500);
+		SimonGameJonathanZ sg = new SimonGameJonathanZ(1000,1000);
 		Thread game = new Thread(sg);
 		game.start();
 	}

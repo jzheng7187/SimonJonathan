@@ -3,6 +3,10 @@ package SimonJonathan;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import PartnerCodeInHerePlease.ButtonJon;
+import PartnerCodeInHerePlease.Move;
+import PartnerCodeInHerePlease.MoveJon;
+import PartnerCodeInHerePlease.ProgressJon;
 import gui.components.Action;
 import gui.components.TextLabel;
 import gui.components.Visible;
@@ -40,30 +44,41 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 				b = m.getButton();
 				b.highlight();
 				try {
-					Thread.sleep((long)(2*roundNumber/10));
+					Thread.sleep((long)(2000*(2.0/(roundNumber+2))));
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				b.dim();
 			}
 		}
+		b.dim();
 	}
 
 	private void nextRound() {
+//		acceptingInput = false;
+//		roundNumber++;
+//		sequence.add(randomMove());
+//		changeText("Simon's Turn");
+//		label.setText("");
+//		playSequence();
+//		changeText("Your Turn");
 		acceptingInput = false;
-		roundNumber++;
+		roundNumber ++;
+		progress.setRound(roundNumber);
 		sequence.add(randomMove());
-		changeText("Simon's Turn");
+		progress.setSequenceSize(sequence.size());
+		changeText("Simon's turn.");
 		label.setText("");
 		playSequence();
-		changeText("YOur Turn");
-		
+		changeText("Your turn.");
+		label.setText("");
+		acceptingInput = true;
+		sequenceIndex = 0;	
 	}
 
 	@Override
 	public void initAllObjects(ArrayList<Visible> viewObjects) {
-		addButtons();
+		addButtons(viewObjects);
 		progress = getProgress();
 		label = new TextLabel(130,230,300,40,"Let's play Simon!");
 		sequence = new ArrayList<MoveInterfaceJonathanZ>();
@@ -86,37 +101,32 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 		return new Move(button[select]);
 	}
 
-	private MoveInterfaceJonathanZ getMove(ButtonInterfaceJonathanZ b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * 
 	 * Placeholder until partner finishes implementation of ProgressInterface
 	 */
 	private ProgressInterfaceJonathanZ getProgress() {
-		return null;
+		return new ProgressJon();
 	}
 
-	private void addButtons() {
-		int numberOfButtons = 4;
+	private void addButtons(ArrayList<Visible> viewObjects) {
 		Color[] colors = {Color.red, Color.blue, Color.yellow, Color.green,};
+		String[] name = {"RED", "BLUE", "YELLOW", "GREEN"};
+		int numberOfButtons = 4;
 		button = new ButtonInterfaceJonathanZ[numberOfButtons];
 		for(int i = 0; i < numberOfButtons; i++){
-			final ButtonInterfaceJonathanZ b = getAButton();
-			for(int j = 0; j < colors.length; j++){				
-				button[i].setColor(colors[j]);
-			}
-			button[i].setX(Math.sin(i));
-			button[i].setY(Math.cos(i));
+			button[i] = getAButton();
+			button[i].setName(name[i]);
+			button[i].setColor(colors[i]);
+			button[i].setX(0);
+			button[i].setY(0);
+			final ButtonInterfaceJonathanZ b = button[i];
+			button[i].dim();
 			button[i].setAction(new Action(){
-
 				@Override
 				public void act() {
 					if(acceptingInput){
 						Thread blink = new Thread(new Runnable(){
-
 							public void run(){
 								b.highlight();
 								try {
@@ -126,37 +136,44 @@ public class SimonScreenJonathanZ extends ClickableScreen implements Runnable {
 									e.printStackTrace();
 								}
 								b.dim();
-								if(b == sequence.get(sequenceIndex).getButton()){
-									sequenceIndex++;
-								}else{
-									ProgressInterfaceJonathanZ.gameOver();
-									};
-								if(sequenceIndex == sequence.size()){
-									Thread nextRound = new Thread(SimonScreenJonathanZ.this);
-									nextRound.start();
-								}
 							}
-							});
+						});
 						blink.start();
+						if(b == sequence.get(sequenceIndex).getButton() && acceptingInput){
+							sequenceIndex++;
+						}else if(acceptingInput){
+							ProgressInterfaceJonathanZ.gameOver();
+							return;
+						};
+						if(sequenceIndex == sequence.size()){
+							Thread nextRound = new Thread(SimonScreenJonathanZ.this);
+							nextRound.start();
+						}
 					}
-					
+
 				}
-				
+
 			});
+			viewObjects.add(button[i]);
 		}
 	}
 
 	private ButtonInterfaceJonathanZ getAButton() {
-		return null;
+		return new ButtonJon();
 	}
 
 	private void changeText(String string){
-		label.setText(string);
 		try {
+			label.setText(string);
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public void gameOver() {
+		ProgressInterfaceJonathanZ.gameOver();
+	}
+
 }

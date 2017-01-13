@@ -11,12 +11,14 @@ public interface ButtonInterfaceJonathanZ extends Clickable {
 
 	void setY(double d);
 
-	void setColor(Color blue);
+	void setColor(Color color);
 
 	public void setAction(Action action);
 	
 	void highlight();
 
 	void dim();
+
+	void setName(String string);
 
 }

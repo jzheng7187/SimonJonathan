@@ -18,7 +18,7 @@ public class ProgressJon extends Component implements ProgressInterfaceJonathanZ
 	public String sequence;
 	
 	public ProgressJon() {
-		super(150, 150, WIDTH, HEIGHT);
+		super(100, 100, WIDTH, HEIGHT);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class ProgressJon extends Component implements ProgressInterfaceJonathanZ
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			g.setColor(Color.white);
 			String gameOver = "Game Over!";
-			g.drawString(gameOver, WIDTH - fm.stringWidth(gameOver)/2, 20);
-			g.drawString(sequence,  WIDTH - fm.stringWidth(sequence)/2, 40);
+			g.drawString(gameOver, WIDTH - fm.stringWidth(gameOver), 20);
+			g.drawString(sequence,  WIDTH - fm.stringWidth(sequence), 40);
 			
 		}else{
 			g.setColor(new Color(220,255,230));
@@ -39,7 +39,7 @@ public class ProgressJon extends Component implements ProgressInterfaceJonathanZ
 			g.setColor(Color.black);
 			g.drawRect(0, 0, WIDTH-1, HEIGHT-1);
 			if(round != null && sequence != null){
-				g.drawString(round, WIDTH - fm.stringWidth(round), 20);
+				g.drawString(round, WIDTH - fm.stringWidth(round), 15);
 				g.drawString(sequence, WIDTH - fm.stringWidth(sequence), 40);
 			}
 		}
